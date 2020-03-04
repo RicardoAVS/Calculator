@@ -1,0 +1,36 @@
+body,
+html {
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(to right, rgb(35, 37, 38), rgb(65, 67, 69)) repeat scroll 0%
+    0%;
+}
+
+#box {
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 50px 400px;
+  box-shadow: black 10px;
+  background-color: white;
+}
+
+#inputBox {
+  margin-top: 20px;
+  border-radius: 2px;
+}
+
+.container {
+  margin: 100px auto;
+  padding: auto 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(to right, rgb(35, 37, 38), rgb(65, 67, 69)) repeat scroll 0%
+    0%;
+}
+
+table {
+  margin: auto;
+}
+td {
+  padding: 25px 25px;
+  font-size: 2rem;
+}
