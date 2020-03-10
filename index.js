@@ -1,215 +1,137 @@
-const inputBox = document.getElementById('inputBox');
-const uno = document.getElementById('uno');
-const dos = document.getElementById('dos');
-const tres = document.getElementById('tres');
-const cuatro = document.getElementById('cuatro');
-const cinco = document.getElementById('cinco');
-const seis = document.getElementById('seis');
-const siete = document.getElementById('siete');
-const ocho = document.getElementById('ocho');
-const nueve = document.getElementById('nueve');
-const cero = document.getElementById('cero');
-const sum = document.getElementById('sum');
-const minus = document.getElementById('minus');
-const igual = document.getElementById('igual');
-let acc = '';
-let curr = '';
-let input = (inputBox.value = 0);
-let suma = false;
-let menos = false;
+const btnOne = document.getElementById('calc-one');
+const Two = document.getElementById('calc-two');
+const btnThree = document.getElementById('calc-three');
+const btnFour = document.getElementById('calc-four');
+const btnFive = document.getElementById('calc-five');
+const btnSix = document.getElementById('calc-six');
+const btnSeven = document.getElementById('calc-seven');
+const btnEigth = document.getElementById('calc-eigth');
+const btnNine = document.getElementById('calc-nine');
+const btnCero = document.getElementById('calc-zero');
 
-// modicar la caja del input al hacer click
-uno.addEventListener('click', (e) => {
-  // Si es 0 agregar a la pantalla el numero
-  if (input === 0 && acc === '') {
-    inputBox.value = 1;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 1;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 1;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 1;
-    inputBox.value = curr;
+const btnReset = document.getElementById('calc-clear');
+const btnDecimal = document.getElementById('calc-decimal');
+const btnBackSpace = document.getElementById('calc-backspace');
+const calcDisplay = document.getElementById('calc-display-val');
+
+// Create varialbes for each operator button
+const btnOperator = document.getElementsByClassName('calc-btn-operator');
+
+// Create variables for each number button
+const calcBtnNum = document.getElementsByClassName('calc-btn-num');
+
+let displayVal = '0';
+let previousVal;
+let evalNums = [];
+
+// Reset display
+const delDisplay = () => {
+  displayVal = '0';
+  previousVal = undefined;
+  evalNums = [];
+  calcDisplay.innerText = displayVal;
+};
+
+const updateDisplay = (clickObj) => {
+  let btnText = clickObj.target.innerText;
+  if (displayVal === '0') displayVal = '';
+
+  displayVal += btnText;
+  calcDisplay.innerText = displayVal;
+};
+
+// perform aritmetics
+const performOperation = (clickObj) => {
+  const operator = clickObj.srcElement.id;
+  switch (operator) {
+    case 'calc-addition':
+      {
+        evalNums.push(calcDisplay.innerText);
+        evalNums.push('+');
+        previousVal = calcDisplay.innerText;
+        displayVal = '';
+        calcDisplay.innerText = '0';
+      }
+      break;
+
+    case 'calc-minus':
+      {
+        evalNums.push(calcDisplay.innerText);
+        evalNums.push('-');
+        previousVal = calcDisplay.innerText;
+        displayVal = '';
+        calcDisplay.innerText = '0';
+      }
+      break;
+
+    case 'calc-divide':
+      {
+        evalNums.push(calcDisplay.innerText);
+        evalNums.push('/');
+        previousVal = calcDisplay.innerText;
+        displayVal = '';
+        calcDisplay.innerText = '0';
+      }
+      break;
+
+    case 'calc-multiply':
+      {
+        evalNums.push(calcDisplay.innerText);
+        evalNums.push('*');
+        previousVal = calcDisplay.innerText;
+        displayVal = '';
+        calcDisplay.innerText = '0';
+      }
+      break;
+
+    case 'calc-equals':
+      {
+        evalNums.push(displayVal);
+        let result = eval(evalNums.join(' '));
+        displayVal += result + '';
+        calcDisplay.innerText = result;
+        evalNums = [];
+        displayVal = '0';
+        previousVal = undefined;
+        console.log(previousVal);
+      }
+      break;
+
+    default:
+      break;
   }
+};
+
+// loop through each calculator num and add click event
+for (let i = 0; i < calcBtnNum.length; i++) {
+  calcBtnNum[i].addEventListener('click', updateDisplay, false);
+}
+
+// iterate through each operator button and add click event
+for (let i = 0; i < btnOperator.length; i++) {
+  btnOperator[i].addEventListener('click', performOperation, false);
+}
+
+// Reset the display and stored values
+btnReset.addEventListener('click', delDisplay);
+
+// remove last number of the array AKA(Display)
+btnBackSpace.addEventListener('click', () => {
+  let currDisplayNum = displayVal.slice(0, -1);
+  displayVal = currDisplayNum;
+  calcDisplay.innerText = displayVal;
+
+  if (displayVal === '') displayVal = '0';
+
+  calcDisplay.innerText = displayVal;
 });
 
-dos.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 2;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 2;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 2;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 3;
-    inputBox.value = curr;
+// Add decimal notation to current number
+btnDecimal.addEventListener('click', () => {
+  if (!displayVal.includes('.')) {
+    displayVal += '.';
+    calcDisplay.innerText = displayVal;
   }
-});
 
-tres.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 3;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 3;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 3;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 3;
-    inputBox.value = curr;
-  }
-});
-
-cuatro.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 4;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 4;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 4;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 4;
-    inputBox.value = curr;
-  }
-});
-
-cinco.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 5;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 5;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 5;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 5;
-    inputBox.value = curr;
-  }
-});
-
-seis.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 6;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 6;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 6;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 6;
-    inputBox.value = curr;
-  }
-});
-
-siete.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 7;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 7;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 7;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 7;
-    inputBox.value = curr;
-  }
-});
-
-ocho.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 8;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 8;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 8;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 8;
-    inputBox.value = curr;
-  }
-});
-
-nueve.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 9;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 9;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 9;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 9;
-    inputBox.value = curr;
-  }
-});
-
-cero.addEventListener('click', (e) => {
-  if (input === 0 && acc === '') {
-    inputBox.value = 0;
-    acc += inputBox.value;
-    input = acc;
-  } else if (acc !== '' && suma === false && menos === false) {
-    acc += 0;
-    inputBox.value = acc;
-  } else if (suma === true) {
-    curr += 0;
-    inputBox.value = curr;
-  } else if (menos === true) {
-    curr += 0;
-    inputBox.value = curr;
-  }
-});
-
-// Borrar lo que estaba en pantalla y agregar el valor acumulado a una variable
-sum.addEventListener('click', (e) => {
-  inputBox.value = 0;
-  suma = true;
-});
-
-minus.addEventListener('click', (e) => {
-  inputBox.value = 0;
-  menos = true;
-});
-
-igual.addEventListener('click', (e) => {
-  if (suma === true) {
-    inputBox.value = parseFloat(acc) + parseFloat(curr);
-  } else if (menos === true) {
-    inputBox.value = parseFloat(acc) - parseFloat(curr);
-  }
-});
-
-// TODO
-inputBox.addEventListener('keypress', (e) => {
-  console.log(e);
+  calcDisplay.innerText = displayVal;
 });

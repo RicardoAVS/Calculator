@@ -1,36 +1,84 @@
-body,
-html {
-  background: rgba(0, 0, 0, 0)
-    linear-gradient(to right, rgb(35, 37, 38), rgb(65, 67, 69)) repeat scroll 0%
-    0%;
+@import url('https://fonts.googleapis.com/css?family=Roboto:100');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
-#box {
-  border: 2px solid black;
-  border-radius: 10px;
-  margin: 50px 400px;
-  box-shadow: black 10px;
-  background-color: white;
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
 }
 
-#inputBox {
-  margin-top: 20px;
-  border-radius: 2px;
-}
-
-.container {
-  margin: 100px auto;
-  padding: auto 0;
+.calc-btn {
+  background-color: silver;
+  color: black;
+  width: 25px;
+  height: 45px;
+  border: 1px solid gray;
   text-align: center;
-  background: rgba(0, 0, 0, 0)
-    linear-gradient(to right, rgb(35, 37, 38), rgb(65, 67, 69)) repeat scroll 0%
-    0%;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 100;
+  padding-top: 3px;
+}
+.calc-btn:hover {
+  background-color: orange;
 }
 
-table {
-  margin: auto;
+div > .row {
+  display: table;
+  table-layout: fixed;
+  width: 200px;
 }
-td {
-  padding: 25px 25px;
-  font-size: 2rem;
+.column {
+  display: table-cell;
+}
+
+#calc-zero {
+  width: 49.66666667px;
+  border-radius: 0 0 0 7px;
+}
+#calc-clear {
+  width: 49.66666667px;
+}
+
+#calc-display-val {
+  height: 80px;
+  color: white;
+  text-align: right;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-top: 1px solid gray;
+  font-size: 48px;
+  background-color: #383838;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 12px;
+  border-radius: 7px 7px 0 0;
+}
+.calc-btn-operator {
+  background-color: orange;
+  color: white;
+}
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+#calc-equals {
+  border-radius: 0 0 7px 0;
+}
+#calc-parent {
+  margin-left: calc(50% - 100px);
 }
